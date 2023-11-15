@@ -69,7 +69,7 @@ start:
     call A20_enable
 
     ; COMPLETAR - Cargar la GDT
-    LGDT &GDT_DESC
+    LGDT [GDT_DESC]
     
 
     ; COMPLETAR - Setear el bit PE del registro CR0
@@ -113,7 +113,7 @@ modo_protegido:
     call screen_draw_layout
 
     call idt_init
-    LIDT &IDT_DESC
+    LIDT [IDT_DESC]
 
     call mmu_init_kernel_dir
     mov CR3, eax
@@ -123,6 +123,9 @@ modo_protegido:
 
     call tss_init
     call sched_init
+
+    call tasks_init    
+
     call tasks_screen_draw
 
     mov ax, INIT_TASK_SEL
@@ -130,10 +133,11 @@ modo_protegido:
 
     call pic_reset
     call pic_enable    
-    sti
+    
 
-    call tasks_init
-
+    ;call tasks_init
+    
+    
     jmp IDLE_TASK_SEL:0x000    
 
     

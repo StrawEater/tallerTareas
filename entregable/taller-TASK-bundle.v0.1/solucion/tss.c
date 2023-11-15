@@ -21,7 +21,7 @@ tss_t tss_idle = {
     .ss1 = 0,
     .cr3 = KERNEL_PAGE_DIR,
     .eip = TASK_IDLE_CODE_START,
-    .eflags = (EFLAGS_IF | 0x2),
+    .eflags = (EFLAGS_IF),
     .esp = KERNEL_STACK,
     .ebp = KERNEL_STACK,
     .cs = GDT_CODE_0_SEL,
@@ -88,9 +88,9 @@ tss_t tss_create_user_task(paddr_t code_start)
       .fs = GDT_DATA_3_SEL,
       .gs = GDT_DATA_3_SEL,
       .ss = GDT_DATA_3_SEL,
-      .ss0 = stack0,
+      .ss0 = GDT_DATA_0_SEL,
       .esp0 = esp0,
-      .eflags = EFLAGS_IF | 0x2,
+      .eflags = EFLAGS_IF,
   };
 }
 

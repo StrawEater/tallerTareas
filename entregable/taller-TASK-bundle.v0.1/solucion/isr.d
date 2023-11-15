@@ -1,2 +1,2 @@
-isr.o : isr.asm
+isr.o : isr.asm print.mac
 

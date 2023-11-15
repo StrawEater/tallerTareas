@@ -153,6 +153,8 @@ _isr14:
   test al, al
   jne .fin
   .ring0_exception:
+  
+  popad
 	; Si llegamos hasta aca es que cometimos un page fault fuera del area compartida.
   call kernel_exception
   jmp $
