@@ -152,12 +152,13 @@ _isr14:
   add esp, 16
   test al, al
   jne .fin
-  .ring0_exception:
-  
   popad
+
+  ISRc 14
+
 	; Si llegamos hasta aca es que cometimos un page fault fuera del area compartida.
-  call kernel_exception
-  jmp $
+  ;call kernel_exception
+  ;jmp $
 
   .fin:
   call pic_finish1

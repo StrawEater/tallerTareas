@@ -134,10 +134,15 @@ modo_protegido:
     call pic_reset
     call pic_enable    
     
+    ; El PIT (Programmable Interrupt Timer) corre a 1193182Hz.
+    ; Cada iteracion del clock decrementa un contador interno, cuando éste llega 
+    ; a cero se emite la interrupción. El valor inicial es 0x0 que indica 65536, 
+    ; es decir 18.206 Hz
+    mov ax, 0x18
+    out 0x40, al
+    rol ax, 8
+    out 0x40, al
 
-    ;call tasks_init
-    
-    
     jmp IDLE_TASK_SEL:0x000    
 
     

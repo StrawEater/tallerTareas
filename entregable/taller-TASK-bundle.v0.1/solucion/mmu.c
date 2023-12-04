@@ -123,6 +123,8 @@ void mmu_map_page(uint32_t cr3, vaddr_t virt, paddr_t phy, uint32_t attrs)
     entradaDirectorio->attrs = attrs | MMU_P;
   }
 
+  entradaDirectorio->attrs = entradaDirectorio->attrs | attrs;
+
   // tomamos la direccion de la entrada de directorio como el inicio de una tabla de paginas
   pt_entry_t *tabla = (pt_entry_t *)(MMU_ENTRY_PADDR(entradaDirectorio->pt));
 
